@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using event_scheduler.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -22,6 +24,9 @@ namespace event_scheduler
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSession();
+            services.AddHttpContextAccessor();
+            services.AddDbContext<MyContext>(options => options.UseMySql(Configuration["DBInfo:ConnectionString"]));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
@@ -38,6 +43,8 @@ namespace event_scheduler
             }
 
             app.UseStaticFiles();
+            
+            app.UseSession();
 
             app.UseMvc(routes =>
             {
