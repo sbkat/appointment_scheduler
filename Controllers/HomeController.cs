@@ -41,7 +41,7 @@ namespace event_scheduler.Controllers
                 HttpContext.Session.SetString("User", newUser.email);
                 HttpContext.Session.SetString("UserName", newUser.firstName);
                 HttpContext.Session.SetInt32("UserId", newUser.UserId);
-                return RedirectToAction("Home");
+                return RedirectToAction("Dashboard");
             }
         }
         else
@@ -74,7 +74,7 @@ namespace event_scheduler.Controllers
                     HttpContext.Session.SetString("User", existingUser.email);
                     HttpContext.Session.SetString("UserName", userInDb.firstName);
                     HttpContext.Session.SetInt32("UserId", userInDb.UserId);
-                    return RedirectToAction("Home");
+                    return RedirectToAction("Dashboard");
                 }
             }
             else
@@ -86,6 +86,18 @@ namespace event_scheduler.Controllers
         else
         {
             return View("Login");
+        }
+    }
+    [HttpGet("dashboard")]
+    public IActionResult Dashboard() 
+    {
+        if(HttpContext.Session.GetString("User")==null)
+        {
+            return RedirectToAction("Index");
+        }
+        else
+        {
+            return View();
         }
     }
 
