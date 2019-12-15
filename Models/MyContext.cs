@@ -6,6 +6,8 @@ namespace event_scheduler.Models
     {
         public MyContext(DbContextOptions options) : base(options) { }
         public DbSet<User> Users { get; set; }
+        public DbSet<Participant> Participants { get; set; }
+        public DbSet<Event> Events { get; set; }
 
     }
 }
