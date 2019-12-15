@@ -100,6 +100,78 @@ namespace event_scheduler.Controllers
             return View();
         }
     }
+    [HttpGet("new")]
+    public IActionResult New()
+    {        
+        if(HttpContext.Session.GetString("User")==null)
+        {
+            return RedirectToAction("Index");
+        }
+        else
+        {
+        return View();
+        }
+    }
+    [HttpPost("submitnew")]
+    public IActionResult SubmitNew(Participant newEvent)
+    {
+        if(ModelState.IsValid)
+        {
+            if(newEvent.Event.Date > DateTime.Now)
+            {
+                User thisUser = dbContext.Users.FirstOrDefault(user => user.UserId == HttpContext.Session.GetInt32("UserId"));
+                newEvent.Event.Creator = thisUser;
+                newEvent.Event.UserId = thisUser.UserId;
+                dbContext.Add(newEvent.Event);
+                dbContext.SaveChanges();
+                return RedirectToAction("Dashboard");
+            }
+            else
+            {
+                ModelState.AddModelError("Date", "Event date must be chosen for the future.");
+                return View("New");
+            }
+        }
+        return View("New");
+    }
+    [HttpPost("RSVP")]
+    public IActionResult RSVP(int id) 
+    {
+        if(HttpContext.Session.GetString("User")==null)
+        {
+            return RedirectToAction("Index");
+        }
+        Participant UserRsvp = dbContext.Participants.Where(act => act.EventId == id).FirstOrDefault(user => user.UserId == HttpContext.Session.GetInt32("UserId"));
+        User thisUser = dbContext.Users.FirstOrDefault(user => user.UserId == HttpContext.Session.GetInt32("UserId")); 
+        if(UserRsvp==null)
+        {
+            Participant newRSVP = new Participant();
+            newRSVP.EventId = id;
+            newRSVP.UserId = (int)HttpContext.Session.GetInt32("UserId");
+            newRSVP.Attending = thisUser;
+            dbContext.Add(newRSVP);
+            dbContext.SaveChanges();
+            return RedirectToAction("Dashboard");
+        }
+        else
+        {
+            dbContext.Participants.Remove(UserRsvp);
+            dbContext.SaveChanges();
+            return RedirectToAction("Dashboard");
+        }
+    }
+    public IActionResult Delete(int id)
+    {
+        PublicEvent thisEvent = dbContext.Events.FirstOrDefault(act => act.EventId == id);
+        dbContext.Events.Remove(thisEvent);
+        dbContext.SaveChanges();
+        return RedirectToAction("Dashboard");
+    }
+    public IActionResult Logout()
+    {
+        HttpContext.Session.Clear();
+        return RedirectToAction("Index");
+    }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

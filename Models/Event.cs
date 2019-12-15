@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace event_scheduler.Models
 {
-    public class Event
+    public class PublicEvent
     {
         [Key]
         public int EventId { get; set; }

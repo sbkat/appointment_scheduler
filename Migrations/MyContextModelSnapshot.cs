@@ -17,7 +17,25 @@ namespace event_scheduler.Migrations
                 .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("event_scheduler.Models.Event", b =>
+            modelBuilder.Entity("event_scheduler.Models.Participant", b =>
+                {
+                    b.Property<int>("ParticipantId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("EventId");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("ParticipantId");
+
+                    b.HasIndex("EventId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Participants");
+                });
+
+            modelBuilder.Entity("event_scheduler.Models.PublicEvent", b =>
                 {
                     b.Property<int>("EventId")
                         .ValueGeneratedOnAdd();
@@ -49,24 +67,6 @@ namespace event_scheduler.Migrations
                     b.ToTable("Events");
                 });
 
-            modelBuilder.Entity("event_scheduler.Models.Participant", b =>
-                {
-                    b.Property<int>("ParticipantId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("EventId");
-
-                    b.Property<int>("UserId");
-
-                    b.HasKey("ParticipantId");
-
-                    b.HasIndex("EventId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Participants");
-                });
-
             modelBuilder.Entity("event_scheduler.Models.User", b =>
                 {
                     b.Property<int>("UserId")
@@ -93,23 +93,23 @@ namespace event_scheduler.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("event_scheduler.Models.Event", b =>
-                {
-                    b.HasOne("event_scheduler.Models.User", "Creator")
-                        .WithMany("EventsCreated")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("event_scheduler.Models.Participant", b =>
                 {
-                    b.HasOne("event_scheduler.Models.Event", "Event")
+                    b.HasOne("event_scheduler.Models.PublicEvent", "Event")
                         .WithMany("Participants")
                         .HasForeignKey("EventId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("event_scheduler.Models.User", "Attending")
                         .WithMany("EventsToAttend")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("event_scheduler.Models.PublicEvent", b =>
+                {
+                    b.HasOne("event_scheduler.Models.User", "Creator")
+                        .WithMany("EventsCreated")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

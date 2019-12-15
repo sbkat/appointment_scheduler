@@ -2971,6 +2971,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\Kathy\\Desktop\\Coding\\Coding Dojo\\csharp\\event_scheduler\\Views\\Home\\New.cshtml",
+      "TargetPath": "Views\\Home\\New.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\Kathy\\Desktop\\Coding\\Coding Dojo\\csharp\\event_scheduler\\Views\\Home\\Index.cshtml",
       "TargetPath": "Views\\Home\\Index.cshtml",
       "FileKind": "mvc"

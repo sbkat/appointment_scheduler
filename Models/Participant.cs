@@ -8,7 +8,7 @@ namespace event_scheduler.Models
         public int ParticipantId { get; set; }
         public int UserId { get; set; }
         public int EventId { get; set; }
-        public Event Event { get; set; }
+        public PublicEvent Event { get; set; }
         public User Attending { get; set; }
     }
 }

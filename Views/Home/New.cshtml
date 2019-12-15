@@ -1,0 +1,39 @@
+@model Participant
+
+<div>
+    <p class="lead">Events</p>
+    <a asp-action="Home" asp-controller="home">Home</a>
+    <a asp-action="Logout" asp-controller="home">Logout</a>
+</div>
+<hr>
+<div>
+    <p class="lead">Create An Event</p>
+    <form asp-action="SubmitNew" asp-controller="Home" method="post">
+        <span asp-validation-for="@Model.Event.Title"></span>
+        <label asp-for="@Model.Event.Title"></label>
+        <input asp-for="@Model.Event.Title"><br>
+
+        <label asp-for="@Model.Event.Time"></label>
+        <input asp-for="@Model.Event.Time"><br>
+        
+        <span asp-validation-for="@Model.Event.Date"></span>
+        <label asp-for="@Model.Event.Date"></label>
+        <input asp-for="@Model.Event.Date"><br>
+
+        <label asp-for="@Model.Event.DurationInt"></label>
+        <input asp-for="@Model.Event.DurationInt" class="inline">
+        
+        <label asp-for="@Model.Event.DurationTime"></label>
+        <select asp-for="@Model.Event.DurationTime">
+            <option value="Hours">Hours</option>
+            <option value="Minutes">Minutes</option>
+            <option value="Days">Days</option>
+        </select><br>
+
+        <span asp-validation-for="@Model.Event.Description"></span>
+        <label asp-for="@Model.Event.Description"></label>
+        <textarea asp-for="@Model.Event.Description"></textarea>
+        <br>
+        <button class="btn btn-info">Create Event!</button>
+    </form>
+</div>

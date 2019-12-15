@@ -1,1 +1,27 @@
-logged in
+@model List<PublicEvent>
+
+<div> 
+    <p class="lead">Events</p><br>
+    <p class="lead title">Welcome, @HttpContextAccessor.HttpContext.Session.GetString("UserName")!</p>
+    <a asp-action="Logout" asp-controller="home">Logout</a>
+</div>
+<hr>
+<div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Event</th>
+                <th scope="col">Date and Time</th>
+                <th scope="col">Duration</th>
+                <th scope="col">Event Coordinator</th>
+                <th scope="col">No. of Participants</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+</div>
+
+<a href="/new" class="btn btn-info">Add New Event</a>

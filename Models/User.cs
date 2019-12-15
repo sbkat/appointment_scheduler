@@ -36,6 +36,6 @@ namespace event_scheduler.Models
         public DateTime CreatedAt {get;set;} = DateTime.Now;
         public DateTime UpdatedAt {get;set;} = DateTime.Now;
         public List<Participant> EventsToAttend { get; set; }
-        public List<Event> EventsCreated { get; set; }
+        public List<PublicEvent> EventsCreated { get; set; }
     }
 }
