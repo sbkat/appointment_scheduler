@@ -31,3 +31,4 @@ C:\Users\Kathy\Desktop\Coding\Coding Dojo\csharp\event_scheduler\obj\Debug\netco
 C:\Users\Kathy\Desktop\Coding\Coding Dojo\csharp\event_scheduler\obj\Debug\netcoreapp2.2\event_scheduler.csproj.CopyComplete
 C:\Users\Kathy\Desktop\Coding\Coding Dojo\csharp\event_scheduler\obj\Debug\netcoreapp2.2\Razor\Views\Home\Dashboard.g.cshtml.cs
 C:\Users\Kathy\Desktop\Coding\Coding Dojo\csharp\event_scheduler\obj\Debug\netcoreapp2.2\Razor\Views\Home\New.g.cshtml.cs
+C:\Users\Kathy\Desktop\Coding\Coding Dojo\csharp\event_scheduler\obj\Debug\netcoreapp2.2\Razor\Views\Home\Details.g.cshtml.cs

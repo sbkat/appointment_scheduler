@@ -2961,6 +2961,11 @@
   "RootNamespace": "event_scheduler",
   "Documents": [
     {
+      "FilePath": "c:\\Users\\Kathy\\Desktop\\Coding\\Coding Dojo\\csharp\\event_scheduler\\Views\\Home\\Details.cshtml",
+      "TargetPath": "Views\\Home\\Details.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\Kathy\\Desktop\\Coding\\Coding Dojo\\csharp\\event_scheduler\\Views\\Shared\\_CookieConsentPartial.cshtml",
       "TargetPath": "Views\\Shared\\_CookieConsentPartial.cshtml",
       "FileKind": "mvc"

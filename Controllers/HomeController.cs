@@ -140,6 +140,16 @@ namespace event_scheduler.Controllers
         }
         return View("New");
     }
+    [HttpGet("event/{id}")]
+    public IActionResult Details(int id)
+    {
+        PublicEvent thisEvent = dbContext.Events
+            .Include(e => e.Creator)
+            .Include(e => e.Participants)
+            .ThenInclude(p => p.Attending)
+            .FirstOrDefault(e => e.EventId == id);
+        return View(thisEvent);
+    }
     [HttpPost("RSVP")]
     public IActionResult RSVP(int id) 
     {
