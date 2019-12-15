@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using event_scheduler.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 
 namespace event_scheduler.Controllers
 {
@@ -97,7 +98,12 @@ namespace event_scheduler.Controllers
         }
         else
         {
-            return View();
+            List<PublicEvent> allEvents = dbContext.Events
+                .Include(e => e.Creator)
+                .Include(e => e.Participants)
+                .ThenInclude(participant => participant.Attending)
+                .OrderBy(w => w.Date).ToList();
+            return View(allEvents);
         }
     }
     [HttpGet("new")]

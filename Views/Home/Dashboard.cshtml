@@ -19,7 +19,52 @@
             </tr>
         </thead>
         <tbody>
-
+            @foreach(var e in Model)
+            {
+                if(e.Date > DateTime.Now)
+                {
+            <tr>
+                <td><a href="/e/@e.EventId" class="actionLinks">@e.Title</a></td>
+                <td>@e.Date.ToString("MM/dd/yyyy") @e.Time.ToShortTimeString()</td>
+                <td>@e.DurationInt @e.DurationTime</td>
+                <td>@e.Creator.firstName @e.Creator.lastName</td>
+                <td>@e.Participants.Count</td>
+                <td>
+                    @if(e.UserId == HttpContextAccessor.HttpContext.Session.GetInt32("UserId"))
+                    {
+                        <form method="post" asp-action="Delete" asp-controller="home" asp-route-id="@e.EventId">
+                            <input type="submit" class="btn btn-danger" value="Delete">
+                        </form>
+                    }
+                    else
+                    {
+                        if(e.Participants.Count == 0)
+                        {
+                            <form method="post" asp-action="RSVP" asp-controller="home" asp-route-id="@e.EventId">
+                                <input type="submit" class="btn btn-success" value="Join">
+                            </form>
+                        }
+                        else
+                        {
+                            var RsvpForEvent = e.Participants.Where(act => act.EventId == e.EventId).FirstOrDefault(u => u.UserId == HttpContextAccessor.HttpContext.Session.GetInt32("UserId"));
+                            if(RsvpForEvent != null)
+                            {
+                                <form method="post" asp-action="RSVP" asp-controller="home" asp-route-id="@e.EventId">
+                                    <input type="submit" class="btn btn-primary" value="Leave">
+                                </form>
+                            }
+                            else
+                            {
+                                <form method="post" asp-action="RSVP" asp-controller="home" asp-route-id="@e.EventId">
+                                    <input type="submit" class="btn btn-success" value="Join">
+                                </form>
+                            }
+                        }
+                    }
+                </td>
+            </tr>
+                }
+            }
         </tbody>
     </table>
 </div>
