@@ -2,7 +2,7 @@
 
 <div>
     <p class="lead">Events</p>
-    <a asp-action="Home" asp-controller="home">Home</a>
+    <a asp-action="Dashboard" asp-controller="home">Home</a>
     <a asp-action="Logout" asp-controller="home">Logout</a>
 </div>
 <hr>
@@ -11,7 +11,8 @@
     <div class="inline float-right">
     @if(Model.UserId == HttpContextAccessor.HttpContext.Session.GetInt32("UserId"))
     {
-        <form method="post" asp-action="Delete" asp-controller="home" asp-route-id="@Model.EventId">
+        <a href="/events/@Model.EventId/edit" class="btn btn-success no-float inline">Edit</a>
+        <form method="post" asp-action="Delete" asp-controller="home" asp-route-id="@Model.EventId" class="inline">
             <input type="submit" class="btn btn-danger" value="Delete">
         </form>
     }

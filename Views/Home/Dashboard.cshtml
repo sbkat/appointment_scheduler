@@ -24,7 +24,7 @@
                 if(e.Date > DateTime.Now)
                 {
             <tr>
-                <td><a href="/event/@e.EventId" class="actionLinks">@e.Title</a></td>
+                <td><a href="/events/@e.EventId" class="actionLinks">@e.Title</a></td>
                 <td>@e.Date.ToString("MM/dd/yyyy") @e.Time.ToShortTimeString()</td>
                 <td>@e.DurationInt @e.DurationTime</td>
                 <td>@e.Creator.firstName @e.Creator.lastName</td>
@@ -32,10 +32,10 @@
                 <td>
                     @if(e.UserId == HttpContextAccessor.HttpContext.Session.GetInt32("UserId"))
                     {
-                        <form method="post" asp-action="Delete" asp-controller="home" asp-route-id="@e.EventId">
+                        <a href="/events/@e.EventId/edit" class="btn btn-success no-float inline">Edit</a>
+                        <form method="post" asp-action="Delete" asp-controller="home" asp-route-id="@e.EventId" class="inline">
                             <input type="submit" class="btn btn-danger" value="Delete">
                         </form>
-                        <a href="/event/@e.EventId/edit">Edit</a>
                     }
                     else
                     {
@@ -70,4 +70,4 @@
     </table>
 </div>
 
-<a href="/new" class="btn btn-info">Add New Event</a>
+<a href="/events/new" class="btn btn-info">Add New Event</a>

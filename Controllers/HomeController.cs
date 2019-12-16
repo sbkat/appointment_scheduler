@@ -153,12 +153,42 @@ namespace event_scheduler.Controllers
     [HttpGet("events/{id}/edit")]
     public IActionResult Edit(int id)
     {
-        PublicEvent thisEvent = dbContext.Events
-            .Include(e => e.Creator)
-            .Include(e => e.Participants)
-            .ThenInclude(p => p.Attending)
-            .FirstOrDefault(e => e.EventId == id);
-        return View(thisEvent);
+        if(HttpContext.Session.GetString("User")==null)
+        {
+            return RedirectToAction("Index");
+        }
+        else
+        {
+            PublicEvent thisEvent = dbContext.Events
+                .Include(e => e.Creator)
+                .Include(e => e.Participants)
+                .ThenInclude(p => p.Attending)
+                .FirstOrDefault(e => e.EventId == id);
+            return View(thisEvent);
+        }
+    }
+    [HttpPost("events/{id}")]
+    public IActionResult Update(PublicEvent editEvent, int id)
+    {
+        if(ModelState.IsValid)
+        {
+            PublicEvent thisEvent = dbContext.Events.FirstOrDefault(e => e.EventId == id);
+            thisEvent.Title = editEvent.Title;
+            thisEvent.Time = editEvent.Time;
+            thisEvent.Date = editEvent.Date;
+            thisEvent.DurationInt = editEvent.DurationInt;
+            thisEvent.DurationTime = editEvent.DurationTime;
+            thisEvent.Description = editEvent.Description;
+            thisEvent.UpdatedAt = DateTime.Now;
+            thisEvent.UserId = (int)HttpContext.Session.GetInt32("UserId");
+            dbContext.Update(thisEvent);
+            dbContext.SaveChanges();
+            return RedirectToAction("Dashboard");
+        }
+        else
+        {
+            return View("Edit", id);
+        }
     }
     [HttpPost("RSVP")]
     public IActionResult RSVP(int id) 
@@ -186,10 +216,10 @@ namespace event_scheduler.Controllers
             return RedirectToAction("Dashboard");
         }
     }
-    [HttpDelete("events/{id}")]
+    [HttpPost("events/{id}/delete")]
     public IActionResult Delete(int id)
     {
-        PublicEvent thisEvent = dbContext.Events.FirstOrDefault(act => act.EventId == id);
+        PublicEvent thisEvent = dbContext.Events.FirstOrDefault(e => e.EventId == id);
         dbContext.Events.Remove(thisEvent);
         dbContext.SaveChanges();
         return RedirectToAction("Dashboard");

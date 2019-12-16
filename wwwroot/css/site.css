@@ -99,3 +99,8 @@ html {
   float: right;
   margin:20px;
 }
+
+.no-float {
+  float: left;
+  margin: 0px;
+}

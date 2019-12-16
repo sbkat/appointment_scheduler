@@ -1,0 +1,39 @@
+@model PublicEvent
+
+<div>
+    <p class="lead">Events</p>
+    <a asp-action="Dashboard" asp-controller="home">Home</a>
+    <a asp-action="Logout" asp-controller="home">Logout</a>
+</div>
+<hr>
+<div>
+    <p class="lead">Edit this Event</p>
+    <form asp-action="Update" asp-controller="Home" asp-route-id="@Model.EventId" method="post">
+        <span asp-validation-for="@Model.Title"></span>
+        <label asp-for="@Model.Title"></label>
+        <input asp-for="@Model.Title"><br>
+
+        <label asp-for="@Model.Time"></label>
+        <input asp-for="@Model.Time"><br>
+        
+        <span asp-validation-for="@Model.Date"></span>
+        <label asp-for="@Model.Date"></label>
+        <input asp-for="@Model.Date"><br>
+
+        <label asp-for="@Model.DurationInt"></label>
+        <input asp-for="@Model.DurationInt" class="inline">
+        
+        <label asp-for="@Model.DurationTime"></label>
+        <select asp-for="@Model.DurationTime">
+            <option value="Hours">Hours</option>
+            <option value="Minutes">Minutes</option>
+            <option value="Days">Days</option>
+        </select><br>
+
+        <span asp-validation-for="@Model.Description"></span>
+        <label asp-for="@Model.Description"></label>
+        <textarea asp-for="@Model.Description"></textarea>
+        <br>
+        <button class="btn btn-info">Edit Event!</button>
+    </form>
+</div>
