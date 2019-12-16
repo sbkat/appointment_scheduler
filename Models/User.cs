@@ -25,6 +25,9 @@ namespace event_scheduler.Models
         [Required (ErrorMessage = "Enter your password.")]
         [MinLength(8, ErrorMessage = "Password must be at least 8 characters.")]
         [DataType(DataType.Password)]
+        [ContainsNumber]
+        [ContainsSpecialCharacter]
+        [ContainsLetter]
         public string password { get; set; }
         [NotMapped]
         [Display (Name="Confirm Password: ")]
