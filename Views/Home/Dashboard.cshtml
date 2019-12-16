@@ -1,11 +1,10 @@
 @model List<PublicEvent>
 
+<hr>
 <div> 
-    <p class="lead">Events</p><br>
     <p class="lead title">Welcome, @HttpContextAccessor.HttpContext.Session.GetString("UserName")!</p>
     <a asp-action="Logout" asp-controller="home">Logout</a>
 </div>
-<hr>
 <div>
     <table class="table table-striped">
         <thead>

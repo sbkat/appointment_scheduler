@@ -55,8 +55,19 @@ body {
   line-height: 60px; /* Vertically center the text there */
 }
 
+.logo {
+  font-family: "amatic SC";
+  font-size: 50px;
+  margin-right: 10px;
+  padding: 0px;
+}
+
+.color {
+  color: rgb(124, 216, 124);
+}
 
 /* body  */
+
 span {
   display: block;
   color: red;
@@ -69,11 +80,6 @@ h1, a, .title, p {
 a {
   float: right;
   margin: 20px;
-}
-
-
-html {
-  padding-top: 5vh;
 }
 
 .actionLinks {
@@ -104,3 +110,23 @@ html {
   float: left;
   margin: 0px;
 }
+
+form {
+  width: 50%;
+}
+
+/* carousel style  */
+#myCarousel {
+  height:80vh;
+  overflow: hidden;
+}
+
+img {
+  width:20%;
+  height: auto;
+}
+
+.opaque {
+  opacity: 0.8;
+}
+
