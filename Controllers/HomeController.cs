@@ -89,7 +89,7 @@ namespace event_scheduler.Controllers
             return View("Login");
         }
     }
-    [HttpGet("dashboard")]
+    [HttpGet("events")]
     public IActionResult Dashboard() 
     {
         if(HttpContext.Session.GetString("User")==null)
@@ -106,7 +106,7 @@ namespace event_scheduler.Controllers
             return View(allEvents);
         }
     }
-    [HttpGet("new")]
+    [HttpGet("events/new")]
     public IActionResult New()
     {        
         if(HttpContext.Session.GetString("User")==null)
@@ -118,7 +118,7 @@ namespace event_scheduler.Controllers
         return View();
         }
     }
-    [HttpPost("submitnew")]
+    [HttpPost("events")]
     public IActionResult SubmitNew(Participant newEvent)
     {
         if(ModelState.IsValid)
@@ -140,8 +140,18 @@ namespace event_scheduler.Controllers
         }
         return View("New");
     }
-    [HttpGet("event/{id}")]
+    [HttpGet("events/{id}")]
     public IActionResult Details(int id)
+    {
+        PublicEvent thisEvent = dbContext.Events
+            .Include(e => e.Creator)
+            .Include(e => e.Participants)
+            .ThenInclude(p => p.Attending)
+            .FirstOrDefault(e => e.EventId == id);
+        return View(thisEvent);
+    }
+    [HttpGet("events/{id}/edit")]
+    public IActionResult Edit(int id)
     {
         PublicEvent thisEvent = dbContext.Events
             .Include(e => e.Creator)
@@ -176,6 +186,7 @@ namespace event_scheduler.Controllers
             return RedirectToAction("Dashboard");
         }
     }
+    [HttpDelete("events/{id}")]
     public IActionResult Delete(int id)
     {
         PublicEvent thisEvent = dbContext.Events.FirstOrDefault(act => act.EventId == id);
