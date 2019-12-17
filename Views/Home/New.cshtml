@@ -22,7 +22,6 @@
         <label asp-for="@Model.Event.DurationInt"></label>
         <input asp-for="@Model.Event.DurationInt" class="inline">
         
-        <label asp-for="@Model.Event.DurationTime"></label>
         <select asp-for="@Model.Event.DurationTime">
             <option value="Hours">Hours</option>
             <option value="Minutes">Minutes</option>
@@ -36,3 +35,10 @@
         <button class="btn btn-info">Create Event!</button>
     </form>
 </div>
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script>
+  $(document).ready(function(){
+    $('select').formSelect();
+  });
+</script>
