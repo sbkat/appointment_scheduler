@@ -23,6 +23,11 @@ namespace event_scheduler.Controllers
     {
         return View();
     }
+    [HttpGet("register")]
+    public IActionResult RegisterPartial()
+    {
+        return View();
+    }
     [HttpPost("register")]
     public IActionResult Register(User newUser)
     {
