@@ -1,5 +1,5 @@
 ﻿.contain {
-  margin: 0px;
+  text-align: center;
   padding: 0px;
   width: 100vw;
 }
@@ -10,14 +10,22 @@
   padding: 0px;
 }
 
-.right {
-  float: right;
+#search-input {
+  width: 30vw;
+}
+
+#search-icon {
+  width: 23.5px;
+  padding: 4px;
 }
 
 /* carousel  */
 .carousel-container {
   height: auto;
   width: 60vw;
+
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* body  */
