@@ -7,7 +7,10 @@
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
         <link href="https://fonts.googleapis.com/css?family=Amatic+SC&display=swap" rel="stylesheet">
+        <link rel="icon" type="image/png" href="https://2.bp.blogspot.com/-jeVSuBis7NQ/UgEyk8EBg6I/AAAAAAAACqE/HNWeCVeMeww/s1600/ecd-favicon-example.jpg" />
+        <link href="https://fonts.googleapis.com/css?family=Cedarville+Cursive&display=swap" rel="stylesheet">
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -20,38 +23,35 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">eventful</a>
+        <a class="navbar-brand" href="/">eventful</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <form class="form-inline my-2 mr-sm-2">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroupPrepend2"><img id="search-icon" src="https://image.flaticon.com/icons/png/512/116/116836.png"> </span>
-        </div>
-        <input id="search-input" class="form-control mr-sm-2" type="search" placeholder="Search events.." aria-label="Search">
+    <form class="form-inline my-2 mr-sm-2" id="searchbar">
+        <input id="search-input" class="form-control mr-sm-2" type="search" onkeyup="Search()" placeholder="Search events.." aria-label="Search">
         <button id="submit-btn" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="/events">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/register">Register</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/login">Login</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Organize
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Create Event</a>
-                <a class="dropdown-item" href="#">Search for Events</a>
+                <a class="dropdown-item" href="/events/new">Create Event</a>
+                <a class="dropdown-item" href="/events">Search for Events</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">About Us</a>
                 </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/login">Login/Sign Up</a>
+            </li>
+            <li class="nav-item">
+                <a asp-action="Logout" asp-controller="home" class="nav-link">Logout</a>
             </li>
         </ul>
     </div>
@@ -63,9 +63,8 @@
         </main>
     </div>
 
-
-
     <environment include="Development">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
     </environment>

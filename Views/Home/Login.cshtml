@@ -1,19 +1,14 @@
 @model LoginUser
 
-<hr>
-<div>
+<form asp-action="Login" asp-controller="home" method="post" class="loginreg">
     <h6 class="display-4 inline">Login</h6>
-    <a href="/" class="inline">Need to register?</a>
-</div>
+    <input asp-for="loginemail" placeholder="Email"></input><br>
+    <span asp-validation-for="loginemail"></span><br>
 
-<form asp-action="Login" asp-controller="home" method="post">
-    <span asp-validation-for="email"></span><br>
-    <label asp-for="email"></label>
-    <input asp-for="email"></input><br>
-
-    <span asp-validation-for="password"></span><br>
-    <label asp-for="password"></label>
-    <input asp-for="password"></input><br>
+    <input asp-for="loginpassword" placeholder="Password"></input><br>
+    <span asp-validation-for="loginpassword"></span><br>
 
     <button class="btn btn-info">Login</button>
 </form>
+
+<partial name="RegisterPartial"></partial>

@@ -21,7 +21,12 @@ namespace event_scheduler.Controllers
     [HttpGet("")]
     public IActionResult Index()
     {
-        return View();
+        List<PublicEvent> allEvents = dbContext.Events
+            .Include(e => e.Creator)
+            .Include(e => e.Participants)
+            .ThenInclude(participant => participant.Attending)
+            .OrderBy(w => w.Date).ToList();
+        return View(allEvents);
     }
     [HttpGet("register")]
     public IActionResult RegisterPartial()
@@ -36,7 +41,7 @@ namespace event_scheduler.Controllers
             if(dbContext.Users.Any(user => user.email == newUser.email))
             {
                 ModelState.AddModelError("email", "Email is already registered.");
-                return View("Index");
+                return View("Login");
             }
             else
             {
@@ -52,7 +57,7 @@ namespace event_scheduler.Controllers
         }
         else
         {
-            return View("Index");
+            return View("Login");
         }
     }
     [HttpGet("login")]
@@ -65,19 +70,19 @@ namespace event_scheduler.Controllers
     {
         if(ModelState.IsValid)
         {
-            if(dbContext.Users.Any(user => user.email == existingUser.email))
+            if(dbContext.Users.Any(user => user.email == existingUser.loginemail))
             {
-                User userInDb = dbContext.Users.FirstOrDefault(user => user.email == existingUser.email);
+                User userInDb = dbContext.Users.FirstOrDefault(user => user.email == existingUser.loginemail);
                 var hasher = new PasswordHasher<LoginUser>();
-                var result = hasher.VerifyHashedPassword(existingUser, userInDb.password, existingUser.password);
+                var result = hasher.VerifyHashedPassword(existingUser, userInDb.password, existingUser.loginpassword);
                 if(result == 0)
                 {
-                    ModelState.AddModelError("Email", "Invalid Email/Password");
+                    ModelState.AddModelError("loginemail", "Invalid Email/Password");
                     return View("Login");
                 }
                 else
                 {
-                    HttpContext.Session.SetString("User", existingUser.email);
+                    HttpContext.Session.SetString("User", existingUser.loginemail);
                     HttpContext.Session.SetString("UserName", userInDb.firstName);
                     HttpContext.Session.SetInt32("UserId", userInDb.UserId);
                     return RedirectToAction("Dashboard");
@@ -85,7 +90,7 @@ namespace event_scheduler.Controllers
             }
             else
             {
-                ModelState.AddModelError("email", "Email has not been registered.");
+                ModelState.AddModelError("loginemail", "Email has not been registered.");
                 return View("Login");
             }
         }
@@ -97,26 +102,19 @@ namespace event_scheduler.Controllers
     [HttpGet("events")]
     public IActionResult Dashboard() 
     {
-        if(HttpContext.Session.GetString("User")==null)
-        {
-            return RedirectToAction("Index");
-        }
-        else
-        {
-            List<PublicEvent> allEvents = dbContext.Events
-                .Include(e => e.Creator)
-                .Include(e => e.Participants)
-                .ThenInclude(participant => participant.Attending)
-                .OrderBy(w => w.Date).ToList();
-            return View(allEvents);
-        }
+        List<PublicEvent> allEvents = dbContext.Events
+            .Include(e => e.Creator)
+            .Include(e => e.Participants)
+            .ThenInclude(participant => participant.Attending)
+            .OrderBy(w => w.Date).ToList();
+        return View(allEvents);
     }
     [HttpGet("events/new")]
     public IActionResult New()
     {        
         if(HttpContext.Session.GetString("User")==null)
         {
-            return RedirectToAction("Index");
+            return RedirectToAction("LoginError");
         }
         else
         {
@@ -200,7 +198,7 @@ namespace event_scheduler.Controllers
     {
         if(HttpContext.Session.GetString("User")==null)
         {
-            return RedirectToAction("Index");
+            return RedirectToAction("LoginError");
         }
         Participant UserRsvp = dbContext.Participants.Where(act => act.EventId == id).FirstOrDefault(user => user.UserId == HttpContext.Session.GetInt32("UserId"));
         User thisUser = dbContext.Users.FirstOrDefault(user => user.UserId == HttpContext.Session.GetInt32("UserId")); 
@@ -220,6 +218,11 @@ namespace event_scheduler.Controllers
             dbContext.SaveChanges();
             return RedirectToAction("Dashboard");
         }
+    }
+    [HttpGet("error")]
+    public IActionResult LoginError()
+    {
+        return View();
     }
     [HttpPost("events/{id}/delete")]
     public IActionResult Delete(int id)

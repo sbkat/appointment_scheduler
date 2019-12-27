@@ -1,31 +1,21 @@
 @model User
 
-<hr>
-<div>
+<form asp-action="Register" asp-controller="home" method="post" class="loginreg">
     <h6 class="display-4 inline">Register</h6>
-    <a href="/login" class="inline">Already registered?</a>
-</div>
-
-<form asp-action="Register" asp-controller="home" method="post">
+    <input asp-for="firstName" placeholder="First Name"></input><br>
     <span asp-validation-for="firstName"></span><br>
-    <label asp-for="firstName"></label>
-    <input asp-for="firstName"></input><br>
 
+    <input asp-for="lastName" placeholder="Last Name"></input><br>
     <span asp-validation-for="lastName"></span><br>
-    <label asp-for="lastName"></label>
-    <input asp-for="lastName"></input><br>
 
+    <input asp-for="email" placeholder="Email"></input><br>
     <span asp-validation-for="email"></span><br>
-    <label asp-for="email"></label>
-    <input asp-for="email"></input><br>
 
+    <input asp-for="password" placeholder="Password"></input><br>
     <span asp-validation-for="password"></span><br>
-    <label asp-for="password"></label>
-    <input asp-for="password"></input><br>
 
+    <input asp-for="confirmPassword" placeholder="Confirm Password"></input><br>
     <span asp-validation-for="confirmPassword"></span><br>
-    <label asp-for="confirmPassword"></label>
-    <input asp-for="confirmPassword"></input><br>
 
     <button class="btn btn-info">Sign Up</button>
 </form>

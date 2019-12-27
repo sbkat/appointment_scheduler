@@ -1,13 +1,6 @@
 @model PublicEvent
 
-<div>
-    <p class="lead">Events</p>
-    <a asp-action="Dashboard" asp-controller="home">Home</a>
-    <a asp-action="Logout" asp-controller="home">Logout</a>
-</div>
-<hr>
-
-<div>
+<div class="list"> 
     <div class="inline float-right">
     @if(Model.UserId == HttpContextAccessor.HttpContext.Session.GetInt32("UserId"))
     {
@@ -45,11 +38,13 @@
     <h1 class="display-4 inline">@Model.Title</h1>
     <p class="lead block">Event Coordinator: @Model.Creator.firstName @Model.Creator.lastName</p>
     <p class="lead block">Description: @Model.Description</p>
-    <p class="lead block">Participants: </p>
+    <p class="lead block">Participants (@Model.Participants.Count): </p>
     @foreach(var participant in Model.Participants)
     {
-    <ul>
-        <li class="lead">@participant.Attending.firstName @participant.Attending.lastName</li>
+    <ul id="event-list">
+        <li class="lead">&#x25b8; @participant.Attending.firstName @participant.Attending.lastName</li>
     </ul>
     }
 </div>
+
+

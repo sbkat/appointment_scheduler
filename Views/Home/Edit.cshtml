@@ -1,12 +1,7 @@
 @model PublicEvent
 
-<div>
-    <a asp-action="Dashboard" asp-controller="home">Home</a>
-    <a asp-action="Logout" asp-controller="home">Logout</a>
-</div>
-<hr>
-<div>
-    <p class="lead">Edit this Event</p>
+<div class="list"> 
+    <h1 class="display-4">Edit this Event</h1>
     <form asp-action="Update" asp-controller="Home" asp-route-id="@Model.EventId" method="post">
         <span asp-validation-for="@Model.Title"></span>
         <label asp-for="@Model.Title"></label>

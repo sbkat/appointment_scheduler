@@ -9,11 +9,11 @@ namespace event_scheduler.Models
         [Display (Name="Email: ")]
         [Required (ErrorMessage = "Enter your email.")]
         [EmailAddress]
-        public string email { get; set; }
+        public string loginemail { get; set; }
         [Display (Name="Password: ")]
         [Required (ErrorMessage = "Enter your password.")]
         [MinLength(8, ErrorMessage = "Password must be at least 8 characters.")]
         [DataType(DataType.Password)]
-        public string password { get; set; }
+        public string loginpassword { get; set; }
     }
 }

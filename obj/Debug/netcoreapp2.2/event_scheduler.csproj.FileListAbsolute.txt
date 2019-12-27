@@ -33,3 +33,4 @@ C:\Users\Kathy\Desktop\Coding\Coding Dojo\csharp\event_scheduler\obj\Debug\netco
 C:\Users\Kathy\Desktop\Coding\Coding Dojo\csharp\event_scheduler\obj\Debug\netcoreapp2.2\Razor\Views\Home\New.g.cshtml.cs
 C:\Users\Kathy\Desktop\Coding\Coding Dojo\csharp\event_scheduler\obj\Debug\netcoreapp2.2\Razor\Views\Home\Details.g.cshtml.cs
 C:\Users\Kathy\Desktop\Coding\Coding Dojo\csharp\event_scheduler\obj\Debug\netcoreapp2.2\Razor\Views\Home\Edit.g.cshtml.cs
+C:\Users\Kathy\Desktop\Coding\Coding Dojo\csharp\event_scheduler\obj\Debug\netcoreapp2.2\Razor\Views\Home\LoginError.g.cshtml.cs

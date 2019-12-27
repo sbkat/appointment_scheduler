@@ -1,5 +1,37 @@
-﻿.contain {
-  text-align: center;
+﻿/* home  */
+
+#homepage-img {
+  width: 100vw;
+  height: auto;
+}
+
+#home-div {
+  height: 100vh;
+  overflow: hidden;
+}
+
+#overlay {
+  position: absolute; 
+  display:hidden;
+  width: 45vw; 
+  height: 65vh; 
+  top: 25vh;
+  left: 27vw;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(128, 128, 128, 0.336);
+  z-index: 1;
+  color: whitesmoke;
+  font-size: 13vh;
+  font-family: 'Cedarville Cursive', cursive;
+  padding-left: 30px;
+}
+
+.block {
+  display: block;
+}
+
+.contain {
   padding: 0px;
   width: 100vw;
 }
@@ -10,8 +42,23 @@
   padding: 0px;
 }
 
+.navbar-brand {
+  margin-right: 20px;
+}
+
+.dropdown-item {
+  margin: 0px;
+  padding-left: 10px;
+}
+
 #search-input {
   width: 30vw;
+  margin-right: 40vw;
+  color: whitesmoke;
+}
+
+#searchbar {
+  width: 55vw;
 }
 
 #search-icon {
@@ -19,20 +66,23 @@
   padding: 4px;
 }
 
-/* carousel  */
-.carousel-container {
-  height: auto;
-  width: 60vw;
-
-  margin-left: auto;
-  margin-right: auto;
+/* login/reg  */
+.loginreg {
+  width: 35vw;
+  display: inline-block;
+  vertical-align: top;
+  text-align: left;
+  margin-right: 5vw;
+  margin-left: 5vw;
 }
+
 
 /* body  */
 
 span {
   display: block;
   color: red;
+  font-size: 11px;
 }
 
 h1, a, .title, p {
@@ -73,26 +123,17 @@ a {
   margin: 0px;
 }
 
-form {
-  width: 50%;
+.yellow {
+  padding: 20vh;
+  background-color: yellow;
+  height: 90vh;
 }
 
-/* carousel style  */
-#myCarousel {
-  height:80vh;
-  overflow: hidden;
+/* dashboard  */
+.list {
+  padding: 0px 30px;
 }
 
-img {
-  width:20%;
-  height: auto;
-}
-
-.opaque {
-  opacity: 0.8;
-}
-
-.container {
-  margin: 0% 5%;
-  width: 90%;
+::-webkit-scrollbar {
+  width: 0px;
 }
